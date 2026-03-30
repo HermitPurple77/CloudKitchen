@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>CloudKitchen — Management System</title>
+  <link rel="stylesheet" href="styles.css"/>
+</head>
+<body>
+<div class="app">
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+    <div class="sidebar-brand">
+      <div class="brand-icon">🍽️</div>
+      <div class="brand-name">CloudKitchen</div>
+      <div class="brand-tag">Management System</div>
+    </div>
+    <nav class="nav">
+      <div class="nav-section">
+        <div class="nav-label">Workspace</div>
+        <button class="nav-item active" data-page="staff">
+          <span class="nav-icon">👨‍🍳</span><span>Staff Directory</span>
+        </button>
+        <button class="nav-item" data-page="shifts">
+          <span class="nav-icon">📅</span><span>Shift Planner</span>
+        </button>
+        <button class="nav-item" data-page="analytics">
+          <span class="nav-icon">📊</span><span>Analytics</span>
+        </button>
+      </div>
+    </nav>
+    <div class="sidebar-footer">
+      <div class="s-avatar">AK</div>
+      <div><div class="s-name">Admin</div><div class="s-role">Kitchen Owner</div></div>
+    </div>
+  </aside>
+
+  <!-- MAIN -->
+  <div class="main">
+    <div class="topbar">
+      <div>
+        <div class="page-title" id="pageTitle">Staff Directory</div>
+        <div class="page-sub" id="pageSub">Add, edit &amp; manage your team</div>
+      </div>
+      <div style="display:flex;align-items:center;gap:10px">
+        <span class="mono" id="todayDate" style="font-size:11px;color:var(--muted)"></span>
+        <span class="badge badge-green">● Live</span>
+      </div>
+    </div>
+    <div class="content" id="content"></div>
+  </div>
+</div>
+
+<!-- TOAST -->
+<div class="toast" id="toast" style="display:none"></div>
+
+<!-- MODAL OVERLAY -->
+<div class="modal-bg" id="modalBg" style="display:none">
+  <div class="modal" id="modalBox"></div>
+</div>
+
+<!-- CONFIRM OVERLAY -->
+<div class="modal-bg" id="confirmBg" style="display:none">
+  <div class="confirm-box" id="confirmBox"></div>
+</div>
+
+<script src="app.js"></script>
+</body>
+</html>
