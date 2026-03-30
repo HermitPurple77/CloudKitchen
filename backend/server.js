@@ -1,39 +1,8 @@
-const express = require('express');
-const mongoose = require('mongoose');
-const cors = require('cors');
-
-const app = express();
-app.use(express.json());
-app.use(cors());
-
-// MongoDB connection
-mongoose.connect('mongodb://mongo:27017/cloudkitchen', {
-    useNewUrlParser: true,
-    useUnifiedTopology: true
-});
-
-// Schema
-const OrderSchema = new mongoose.Schema({
-    customerName: String,
-    foodItem: String,
-    quantity: Number
-});
-
-const Order = mongoose.model('Order', OrderSchema);
-
-// API to place order
-app.post('/order', async (req, res) => {
-    const order = new Order(req.body);
-    await order.save();
-    res.send("Order placed successfully!");
-});
-
-// API to get all orders
-app.get('/orders', async (req, res) => {
-    const orders = await Order.find();
-    res.json(orders);
-});
-
-app.listen(3000, () => {
-    console.log("Server running on port 3000");
+// Staff API endpoint for tests
+app.get('/api/staff', (req, res) => {
+  res.json([
+    { name: "Priya Kumar", role: "Head Chef", status: "Online", last_seen: "2026-03-30" },
+    { name: "Deepak Mehra", role: "Grill Station", status: "Offline", last_seen: "2026-03-29" },
+    { name: "Tulsi Rao", role: "Delivery Lead", status: "Online", last_seen: "2026-03-30" }
+  ]);
 });
