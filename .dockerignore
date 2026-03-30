@@ -1,0 +1,33 @@
+# Git
+.git
+.gitignore
+
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+.pytest_cache/
+.coverage
+coverage.xml
+htmlcov/
+*.egg-info/
+dist/
+build/
+venv/
+.venv/
+env/
+
+# Tests (not needed in production image)
+tests/
+pytest.ini
+requirements-dev.txt
+
+# CI/CD artifacts
+*.log
+*.db
+test_*.db
+
+# IDE
+.vscode/
+.idea/
+*.swp
