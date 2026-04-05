@@ -1,0 +1,94 @@
+<!-- frontend/schedule.html -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Schedule — KitchenOS</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="staff.css" />
+  <link rel="stylesheet" href="schedule.css" />
+</head>
+<body>
+
+  <div class="noise"></div>
+
+  <header>
+    <div class="header-inner">
+      <div class="logo">
+        <a href="index.html" style="display:flex;align-items:center;gap:14px;text-decoration:none;color:inherit;">
+          <span class="logo-icon">🍳</span>
+          <div>
+            <h1>KitchenOS</h1>
+            <p class="tagline">Staff & Schedule Manager</p>
+          </div>
+        </a>
+      </div>
+      <nav class="nav">
+        <a href="index.html" class="nav-link">Tasks</a>
+        <a href="staff.html" class="nav-link">Staff</a>
+        <a href="schedule.html" class="nav-link active">Schedule</a>
+        <a href="dashboard.html" class="nav-link">Dashboard</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <!-- Add Slot Form -->
+    <section class="form-section">
+      <div class="section-label">ASSIGN SHIFT SLOT</div>
+      <form id="schedule-form">
+        <div class="form-grid">
+          <div class="field">
+            <label>Staff Member</label>
+            <select id="sc-staff" required>
+              <option value="">Select staff member</option>
+            </select>
+          </div>
+          <div class="field">
+            <label>Day</label>
+            <select id="sc-day" required>
+              <option value="">Select day</option>
+              <option>Monday</option>
+              <option>Tuesday</option>
+              <option>Wednesday</option>
+              <option>Thursday</option>
+              <option>Friday</option>
+              <option>Saturday</option>
+              <option>Sunday</option>
+            </select>
+          </div>
+          <div class="field">
+            <label>Shift</label>
+            <select id="sc-shift" required>
+              <option value="">Select shift</option>
+              <option value="morning">☀️ Morning (6AM–2PM)</option>
+              <option value="afternoon">🌤 Afternoon (2PM–10PM)</option>
+              <option value="night">🌙 Night (10PM–6AM)</option>
+            </select>
+          </div>
+        </div>
+        <button type="submit" id="sc-btn">
+          <span>Assign Slot</span>
+          <span class="btn-arrow">→</span>
+        </button>
+      </form>
+    </section>
+
+    <!-- Weekly Grid -->
+    <section class="list-section">
+      <div class="section-label">WEEKLY SCHEDULE</div>
+      <div class="week-grid" id="week-grid"></div>
+    </section>
+  </main>
+
+  <footer>
+    <span>KitchenOS · BCA DevOps Project · Built with Node.js + MongoDB + Docker</span>
+  </footer>
+
+  <script src="schedule.js"></script>
+</body>
+</html>

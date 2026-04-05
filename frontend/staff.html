@@ -1,0 +1,96 @@
+<!-- frontend/staff.html -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Staff Directory — KitchenOS</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="staff.css" />
+</head>
+<body>
+
+  <div class="noise"></div>
+
+  <header>
+    <div class="header-inner">
+      <div class="logo">
+        <a href="index.html" style="display:flex;align-items:center;gap:14px;text-decoration:none;color:inherit;">
+          <span class="logo-icon">🍳</span>
+          <div>
+            <h1>KitchenOS</h1>
+            <p class="tagline">Staff & Schedule Manager</p>
+          </div>
+        </a>
+      </div>
+      <nav class="nav">
+        <a href="index.html" class="nav-link">Tasks</a>
+        <a href="staff.html" class="nav-link active">Staff</a>
+        <a href="schedule.html" class="nav-link">Schedule</a>
+        <a href="dashboard.html" class="nav-link">Dashboard</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <!-- Add Staff Form -->
+    <section class="form-section">
+      <div class="section-label">ADD STAFF MEMBER</div>
+      <form id="staff-form">
+        <div class="form-grid staff-grid">
+          <div class="field">
+            <label>Full Name</label>
+            <input type="text" id="s-name" placeholder="e.g. Ravi Kumar" required />
+          </div>
+          <div class="field">
+            <label>Role</label>
+            <select id="s-role" required>
+              <option value="">Select role</option>
+              <option value="Head Chef">Head Chef</option>
+              <option value="Sous Chef">Sous Chef</option>
+              <option value="Line Cook">Line Cook</option>
+              <option value="Pastry Chef">Pastry Chef</option>
+              <option value="Kitchen Helper">Kitchen Helper</option>
+              <option value="Dishwasher">Dishwasher</option>
+            </select>
+          </div>
+          <div class="field">
+            <label>Default Shift</label>
+            <select id="s-shift" required>
+              <option value="">Select shift</option>
+              <option value="Morning (6AM–2PM)">Morning (6AM–2PM)</option>
+              <option value="Afternoon (2PM–10PM)">Afternoon (2PM–10PM)</option>
+              <option value="Night (10PM–6AM)">Night (10PM–6AM)</option>
+            </select>
+          </div>
+          <div class="field">
+            <label>Phone</label>
+            <input type="tel" id="s-phone" placeholder="e.g. 98xxxxxxxx" />
+          </div>
+        </div>
+        <button type="submit" id="staff-btn">
+          <span>Add Staff</span>
+          <span class="btn-arrow">→</span>
+        </button>
+      </form>
+    </section>
+
+    <!-- Staff Grid -->
+    <section class="list-section">
+      <div class="section-label">TEAM ROSTER <span id="staff-count" style="margin-left:12px;color:var(--accent)"></span></div>
+      <div id="staff-loading" class="loading">Loading staff…</div>
+      <div id="staff-grid" class="staff-card-grid"></div>
+      <div id="staff-empty" class="empty-state" style="display:none;">No staff added yet.</div>
+    </section>
+  </main>
+
+  <footer>
+    <span>KitchenOS · BCA DevOps Project · Built with Node.js + MongoDB + Docker</span>
+  </footer>
+
+  <script src="staff.js"></script>
+</body>
+</html>

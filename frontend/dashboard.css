@@ -1,0 +1,192 @@
+/* frontend/dashboard.css */
+
+/* STAT CARDS */
+.stat-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 14px;
+  margin-bottom: 0;
+}
+
+@media (max-width: 640px) {
+  .stat-grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+.stat-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 22px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  animation: fadeUp 0.4s ease both;
+  transition: border-color 0.2s, transform 0.2s;
+}
+
+.stat-card:hover { transform: translateY(-2px); border-color: #3a3a36; }
+
+.stat-card.accent-green { border-left: 3px solid var(--done); }
+.stat-card.accent-yellow { border-left: 3px solid var(--accent); }
+.stat-card.accent-orange { border-left: 3px solid var(--accent2); }
+
+.stat-icon { font-size: 20px; }
+
+.stat-value {
+  font-family: var(--font-head);
+  font-size: 32px;
+  font-weight: 800;
+  color: var(--text);
+  line-height: 1;
+  letter-spacing: -1px;
+}
+
+.stat-label {
+  font-size: 11px;
+  color: var(--text-muted);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+/* PROGRESS */
+.progress-block { display: flex; flex-direction: column; gap: 10px; }
+
+.progress-top {
+  display: flex;
+  justify-content: space-between;
+  font-size: 12px;
+  color: var(--text-muted);
+}
+
+.progress-pct {
+  font-family: var(--font-head);
+  font-weight: 700;
+  font-size: 14px;
+  color: var(--accent);
+}
+
+.progress-bar-track {
+  height: 8px;
+  background: var(--surface2);
+  border-radius: 4px;
+  overflow: hidden;
+  border: 1px solid var(--border);
+}
+
+.progress-bar-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--done), var(--accent));
+  border-radius: 4px;
+  width: 0%;
+  transition: width 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* SHIFT BREAKDOWN */
+.shift-breakdown {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.shift-row {
+  display: grid;
+  grid-template-columns: 140px 1fr 40px;
+  align-items: center;
+  gap: 14px;
+  animation: fadeUp 0.3s ease both;
+}
+
+.shift-name {
+  font-size: 12px;
+  color: var(--text-muted);
+}
+
+.shift-bar-track {
+  height: 6px;
+  background: var(--surface2);
+  border-radius: 3px;
+  overflow: hidden;
+}
+
+.shift-bar-fill {
+  height: 100%;
+  border-radius: 3px;
+  transition: width 0.7s ease;
+}
+
+.shift-bar-fill.morning   { background: var(--accent); }
+.shift-bar-fill.afternoon { background: var(--accent2); }
+.shift-bar-fill.night     { background: #8070c8; }
+.shift-bar-fill.other     { background: var(--text-dim); }
+
+.shift-count {
+  font-family: var(--font-head);
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--text);
+  text-align: right;
+}
+
+/* WORKLOAD LIST */
+.workload-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.workload-row {
+  display: grid;
+  grid-template-columns: 160px 1fr auto;
+  align-items: center;
+  gap: 14px;
+  padding: 14px 16px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  animation: fadeUp 0.3s ease both;
+  transition: border-color 0.15s;
+}
+
+.workload-row:hover { border-color: #3a3a36; }
+
+.workload-name {
+  font-family: var(--font-head);
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text);
+}
+
+.workload-bar-track {
+  height: 5px;
+  background: var(--surface2);
+  border-radius: 3px;
+  overflow: hidden;
+}
+
+.workload-bar-fill {
+  height: 100%;
+  background: var(--accent);
+  border-radius: 3px;
+  transition: width 0.7s ease;
+}
+
+.workload-count {
+  font-size: 11px;
+  color: var(--text-muted);
+  white-space: nowrap;
+}
+
+/* RECENT TASKS (reuse task-card from main style.css) */
+.task-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 14px 18px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  animation: fadeUp 0.3s ease both;
+  transition: border-color 0.2s;
+}
+.task-card:hover { border-color: #3a3a36; }

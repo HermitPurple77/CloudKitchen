@@ -1,0 +1,101 @@
+/* frontend/schedule.css */
+
+.week-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 10px;
+}
+
+@media (max-width: 768px) {
+  .week-grid { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 480px) {
+  .week-grid { grid-template-columns: 1fr; }
+}
+
+.day-col {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+  min-height: 220px;
+  display: flex;
+  flex-direction: column;
+}
+
+.day-header {
+  background: var(--surface2);
+  border-bottom: 1px solid var(--border);
+  padding: 10px 12px;
+  font-family: var(--font-head);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  color: var(--text-muted);
+  text-transform: uppercase;
+}
+
+.day-header.today { color: var(--accent); border-bottom-color: var(--accent); }
+
+.day-slots {
+  padding: 10px 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  flex: 1;
+}
+
+.slot {
+  border-radius: var(--radius);
+  padding: 8px 10px;
+  font-size: 11px;
+  position: relative;
+  animation: fadeUp 0.25s ease both;
+}
+
+.slot.morning  { background: rgba(232,197,71,0.1);  border: 1px solid rgba(232,197,71,0.2); }
+.slot.afternoon{ background: rgba(255,107,53,0.1);  border: 1px solid rgba(255,107,53,0.2); }
+.slot.night    { background: rgba(120,100,200,0.12);border: 1px solid rgba(120,100,200,0.25); }
+
+.slot-name {
+  font-family: var(--font-head);
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text);
+  display: block;
+  margin-bottom: 2px;
+}
+
+.slot-label {
+  font-size: 10px;
+  color: var(--text-muted);
+}
+
+.slot.morning  .slot-label { color: #c8a830; }
+.slot.afternoon .slot-label{ color: #e05a20; }
+.slot.night    .slot-label { color: #9080d0; }
+
+.slot-remove {
+  position: absolute;
+  top: 6px;
+  right: 6px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  color: var(--text-dim);
+  font-size: 10px;
+  opacity: 0;
+  transition: opacity 0.15s, color 0.15s;
+  padding: 2px 4px;
+}
+
+.slot:hover .slot-remove { opacity: 1; }
+.slot-remove:hover { color: var(--accent2); }
+
+.day-empty {
+  font-size: 11px;
+  color: var(--text-dim);
+  text-align: center;
+  padding: 20px 8px;
+  letter-spacing: 0.05em;
+}

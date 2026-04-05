@@ -1,0 +1,51 @@
+# docker-compose.yml
+
+version: "3.8"
+
+services:
+  # MongoDB Database
+  mongo:
+    image: mongo:6
+    container_name: kitchen_mongo
+    restart: always
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo_data:/data/db
+
+  # Node.js Backend
+  backend:
+    build: ./backend
+    container_name: kitchen_backend
+    restart: always
+    ports:
+      - "5000:5000"
+    environment:
+      - MONGO_URI=mongodb://mongo:27017/kitchendb
+      - PORT=5000
+    depends_on:
+      - mongo
+
+  # One-shot seed service — runs seed.js then exits
+  seeder:
+    build: ./backend
+    container_name: kitchen_seeder
+    environment:
+      - MONGO_URI=mongodb://mongo:27017/kitchendb
+    depends_on:
+      - mongo
+    command: sh -c "sleep 5 && node seed.js"
+    restart: "no"
+
+  # Nginx Frontend
+  frontend:
+    build: ./frontend
+    container_name: kitchen_frontend
+    restart: always
+    ports:
+      - "3000:80"
+    depends_on:
+      - backend
+
+volumes:
+  mongo_data:
