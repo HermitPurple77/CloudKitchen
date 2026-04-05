@@ -21,12 +21,12 @@ jobs:
 
     steps:
       - name: Checkout Code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Set up Node.js
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
-          node-version: "18"
+          node-version: "20"
 
       - name: Install backend dependencies
         run: cd backend && npm install
@@ -43,10 +43,10 @@ jobs:
 
     steps:
       - name: Checkout Code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v2
+        uses: docker/setup-buildx-action@v3
 
       - name: Build Backend Image
         run: docker build -t kitchen-backend ./backend
@@ -64,21 +64,23 @@ jobs:
 
     steps:
       - name: Checkout Code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Start full stack
         run: |
           docker compose up -d mongo backend seeder frontend
-          sleep 15
+          sleep 20
 
-      - name: Install Python & Selenium
-        run: |
-          pip install selenium pytest pytest-html
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
 
-      - name: Install Chrome
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y chromium-browser chromium-chromedriver
+      - name: Install Python dependencies
+        run: pip install selenium pytest pytest-html
+
+      - name: Install Chrome & ChromeDriver
+        uses: browser-actions/setup-chrome@v1
 
       - name: Run Selenium tests
         run: |
@@ -87,7 +89,7 @@ jobs:
         continue-on-error: true
 
       - name: Upload Selenium report
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         if: always()
         with:
           name: selenium-report
