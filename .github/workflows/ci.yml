@@ -8,12 +8,6 @@ on:
   pull_request:
     branches: [main]
 
-# Required for GitHub Pages deployment
-permissions:
-  contents: read
-  pages: write
-  id-token: write
-
 jobs:
   # ── 1. Unit Tests ────────────────────────────────────────────────────────────
   unit-tests:
@@ -109,12 +103,23 @@ jobs:
         run: docker compose down
 
   # ── 4. Deploy Frontend → GitHub Pages ───────────────────────────────────────
-  # Only on push to main, only after all tests pass.
+  # Needs Pages enabled: repo Settings → Pages → Source → GitHub Actions
   deploy:
     name: Deploy to GitHub Pages
     runs-on: ubuntu-latest
     needs: selenium-tests
     if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+
+    # Pages permissions must be on the JOB, not at workflow level
+    permissions:
+      contents: read
+      pages: write
+      id-token: write
+
+    # Prevent two deploys running at the same time
+    concurrency:
+      group: pages
+      cancel-in-progress: true
 
     environment:
       name: github-pages
@@ -125,14 +130,13 @@ jobs:
         uses: actions/checkout@v4
 
       # Inject the live backend URL into config.js before deploying.
-      # Set BACKEND_URL as a GitHub Secret pointing to wherever your
-      # backend is running (e.g. a VPS, Railway, or your own server).
-      # If not set, it falls back to localhost (useful for local dev).
+      # Add BACKEND_URL as a GitHub Secret if you have a hosted backend.
+      # If not set, pages will fall back to localhost (fine for local Docker demo).
       - name: Inject backend URL into config.js
         run: |
           BACKEND="${{ secrets.BACKEND_URL }}"
           if [ -z "$BACKEND" ]; then
-            echo "⚠️  BACKEND_URL secret not set — keeping localhost default"
+            echo "ℹ️  No BACKEND_URL secret — keeping localhost default"
           else
             echo "🔧 Setting backend to: $BACKEND"
             sed -i "s|http://localhost:5000|${BACKEND}|g" frontend/config.js
@@ -144,7 +148,6 @@ jobs:
       - name: Upload frontend to Pages
         uses: actions/upload-pages-artifact@v3
         with:
-          # Deploy only the frontend folder
           path: ./frontend
 
       - name: Deploy to GitHub Pages
@@ -153,4 +156,4 @@ jobs:
 
       - name: Print live URL
         run: |
-          echo "🚀 Frontend live at: ${{ steps.deployment.outputs.page_url }}"
+          echo "🚀 Live at: ${{ steps.deployment.outputs.page_url }}"
