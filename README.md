@@ -111,4 +111,4 @@ See `.github/workflows/ci.yml` for details.
 
 ## 👨‍💻 Author
 
-BCA DevOps Project — Kitchen Management System
+Srinidhi S — Cloud Kitchen Management System
