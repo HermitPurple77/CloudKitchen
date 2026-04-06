@@ -1,4 +1,4 @@
-# 🍳 KitchenOS — Kitchen Management System
+# 🍳 KitchenOS — Cloud Kitchen Management System
 
 A full-stack web application for managing kitchen staff and their schedules.
 Built as a BCA DevOps project using Node.js, MongoDB, Docker, and GitHub Actions.
